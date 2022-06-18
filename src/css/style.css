@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  margin-left: auto;
+  width: 60%;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+li:last-child {
+  position: absolute;
+  top: 67%;
+}
+
