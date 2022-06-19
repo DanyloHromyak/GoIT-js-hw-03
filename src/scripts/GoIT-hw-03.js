@@ -147,10 +147,14 @@ const account = {
       type,
     });
 
-    return this.transactions[this.transactions.length - 1];
+    return this.transactions;
   },
 
   deposit(amount) {
+    if (amount < 0) {
+      console.log("Помилка! Будь ласка, введіть суму більше 0");
+      return `Ваш поточний баланс на рахунку: ${this.balance}`;
+    }
     this.balance += amount;
     this.createTransaction(amount, Transaction.DEPOSIT);
 
@@ -158,9 +162,13 @@ const account = {
   },
 
   withdraw(amount) {
+    if (amount < 0) {
+      console.log("Помилка! Будь ласка, введіть суму більше 0");
+      return `Ваш поточний баланс на рахунку: ${this.balance}`;
+    }
     if (amount > this.balance) {
-      console.log("Недостатньо коштів на рахунку");
-      return this.balance;
+      console.log("Помилка! Недостатньо коштів на рахунку");
+      return `Ваш поточний баланс на рахунку: ${this.balance}`;
     }
     this.balance -= amount;
     this.createTransaction(amount, Transaction.WITHDRAW);
@@ -191,6 +199,8 @@ console.log(account.getBalance());
 console.log(account.deposit(1000));
 console.log(account.withdraw(500));
 console.log(account.withdraw(2000));
+console.log(account.withdraw(-2000));
+console.log(account.deposit(-1420));
 console.log(account.getTransactionDetails(1));
 console.log(account.getTransactionTotal(Transaction.DEPOSIT));
 console.log(account.getBalance())
