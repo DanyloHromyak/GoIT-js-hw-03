@@ -24,12 +24,85 @@ const cart = {
     }
     return totalPrice;
   },
+  increaseQuantity(productName) {
+    for (const product of this.products) {
+      if (product.name === productName) {
+        product.quantity++;
+        return;
+      }
+    }
+  },
+  decreaseQuantity(productName) {
+    for (const product of this.products) {
+      if (product.name === productName) {
+        product.quantity--;
+        if (product.quantity === 0) {
+          this.remove(productName);
+        }
+        return;
+      }
+    }
+  },
+  changePrice(productName, newPrice) {
+    for (const product of this.products) {
+      if (product.name === productName) {
+        product.price = newPrice;
+        return;
+      }
+    }
+  },
+  changeQuantity(productName, newQuantity) {
+    for (const product of this.products) {
+      if (product.name === productName) {
+        product.quantity = newQuantity;
+        return;
+      }
+    }
+  },
+  getProduct() {
+    const names = []
+    for (const product of this.products) {
+      names.push(product.name);
+    }
+    return names;
+  },
+  generate() {
+    const predictions = ["Вам присняться овечки💀",
+    "Ви програєте всі гроші на паріматчі😉",
+    "Ви невдаха!😁",
+    "Вас вкусить комар👺"];
+    let random = Math.floor(Math.random() * predictions.length);
+    return predictions[random];
+  },
+  order() {
+    let message = "";
+    let order = '';
+    const divider = '---------\n';
+    for (const product of this.products) {
+      order += `${product.name}:  ${product.price} X ${product.quantity} = ${
+        product.quantity * product.price
+      }\n${divider}`;
+    }
+    message += divider;
+    message += `Чек\n`;
+    message += `${divider}\n`;
+    message += order;
+    message += `Сума: ${this.getTotalPrice()} ₴\n`;
+    message += divider;
+    message += `Дякуємо за покупку!\n`;
+    message += divider;
+    message += this.generate();
+    console.log(message);
+    return order;
+  },
+
 };
 
 const apple = {
   name: "Яблуко",
   price: 9.99,
   quantity: 3,
+  totalPrice: 12,
 };
 
 const orange = {
@@ -38,11 +111,24 @@ const orange = {
   quantity: 1,
 };
 
+const { name: productName, totalPrice} = apple;
+console.log(productName);
+console.log(totalPrice);
+
+const products = ["apple", "orange"];
+const [product1, product2] = products;
+console.log(product2)
+
 cart.add(apple);
 cart.add(orange);
+cart.changePrice("Апельсин", 10);
+cart.increaseQuantity('Яблуко');
+cart.generate();
+console.log(cart.getProduct());
+cart.order();
 console.table(cart.getAll());
 console.log(cart.getTotalPrice());
-// cart.remove('Апельсин');
+cart.remove('Апельсин');
 cart.clear();
 
 console.log(cart.getAll());
