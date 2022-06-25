@@ -3,7 +3,8 @@
 }
 
 body {
-  background: #222;
+  background: url("../assets/Геній.jpg");
+  background-color: #222;
 }
 
 ul {
