@@ -147,7 +147,7 @@ const account = {
       type,
     });
 
-    return this.transactions;
+    return this.transactions[this.transactions.length + 1];
   },
 
   deposit(amount) {
