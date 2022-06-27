@@ -15,7 +15,7 @@ for (const key of Object.keys(user)) {
 }
 
 // Завдання 2
-const countProps = obj => Object.keys(obj).length;
+const countProps = (obj) => Object.keys(obj).length;
 
 console.log(countProps({})); // 0
 
@@ -24,7 +24,7 @@ console.log(countProps({ name: "Mango", age: 2 })); // 2
 console.log(countProps({ mail: "poly@mail.com", isOnline: true, score: 500 })); // 3
 
 // Завдання 3
-const findBestEmployee = employees => {
+const findBestEmployee = (employees) => {
   let max = 0;
   let bestEmployee = null;
   for (const key of Object.keys(employees)) {
@@ -63,7 +63,7 @@ console.log(
 ); // lux
 
 // Завдання 4
-const countTotalSalary = employees => {
+const countTotalSalary = (employees) => {
   let total = 0;
   for (const key of Object.keys(employees)) {
     total += employees[key];
@@ -195,12 +195,14 @@ const account = {
   },
 };
 
-console.log(account.getBalance());
-console.log(account.deposit(1000));
-console.log(account.withdraw(500));
-console.log(account.withdraw(2000));
-console.log(account.withdraw(-2000));
-console.log(account.deposit(-1420));
-console.log(account.getTransactionDetails(1));
-console.log(account.getTransactionTotal(Transaction.DEPOSIT));
-console.log(account.getBalance())
+console.log(account.getBalance()); // 0
+console.log(account.deposit(1000)); // Ваш поточний баланс на рахунку після депозиту: 1000
+console.log(account.withdraw(500)); // Ваш поточний баланс на рахунку після виводу грошей: 500
+console.log(account.withdraw(2000)); // Помилка! Недостатньо коштів на рахунку // Ваш поточний баланс на рахунку: 500
+console.log(account.withdraw(-2000)); // Помилка! Будь ласка, введіть суму більше 0 // Ваш поточний баланс на рахунку: 500
+console.log(account.deposit(-1420)); // Помилка! Будь ласка, введіть суму більше 0 // Ваш поточний баланс на рахунку: 500
+console.log(account.getTransactionDetails(1)); // { amount: 1000, type: "deposit" }
+console.log(account.getTransactionTotal(Transaction.DEPOSIT)); // Сума транзакції: 1000, Тип транзакції: deposit
+console.log(account.getTransactionTotal(Transaction.WITHDRAW)); // Сума транзакції: 500, Тип транзакції: withdraw
+console.log(account.getBalance()); // Ваш поточний баланс на рахунку: 500
+console.log(account.transactions); // [{ amount: 1000, type: "deposit" }, { amount: 500, type: "withdraw" }]
